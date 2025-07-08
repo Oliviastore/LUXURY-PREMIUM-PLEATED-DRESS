@@ -7,204 +7,218 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #faf6f2;
-            color: #333;
+            scroll-behavior: smooth;
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #f5f7fa 0%, #ffeef8 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fc 50%, #f0f4f8 100%);
         }
         
-        .price-tag {
-            position: relative;
-            display: inline-block;
+        .price-gradient {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
         }
         
-        .price-tag::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            border-radius: 3px;
-        }
-        
-        .dress-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .dress-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .countdown-box {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        .discount-badge {
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
         }
         
         .testimonial-card {
-            background: white;
-            border-radius: 15px;
-            position: relative;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .testimonial-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            border-radius: 15px 15px 0 0;
-        }
-        
-        .faq-item {
-            border-bottom: 1px solid #eee;
             transition: all 0.3s ease;
         }
         
-        .faq-item:hover {
-            background-color: #fff9f9;
-        }
-        
-        .cta-button {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         .color-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
         
-        .color-option:hover {
+        .color-option:hover, .color-option.active {
             transform: scale(1.1);
+            border-color: #000;
         }
         
-        .color-option.active {
-            border: 2px solid #333;
-            transform: scale(1.1);
+        .gallery-image {
+            transition: all 0.3s ease;
         }
         
-        .denim { background-color: #6f8faf; }
-        .hitam { background-color: #333; }
-        .white { background-color: #f5f5f5; }
-        .milo { background-color: #d4a373; }
-        .navy { background-color: #0a1172; }
-        .grey { background-color: #808080; }
-        .coksu { background-color: #6b4423; }
+        .gallery-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .floating-cta {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="hero-gradient py-4">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-pink-600">LUXURY DRESS</div>
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:flex items-center space-x-2">
-                        <i class="fas fa-phone-alt text-pink-500"></i>
-                        <span>CS: 085-1779-393-65</span>
+<body class="bg-white text-gray-800">
+    <!-- Announcement Bar -->
+    <div class="bg-pink-600 text-white text-center py-2 px-4">
+        <p class="text-sm font-medium">🔥 DISCOUNT UP TO 75% OFF - Harga Spesial Hari Ini Saja! 🔥</p>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold text-pink-600">LUXURY DRESS</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a href="#features" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-pink-600">Detail Produk
+</a>
+                        <a href="#gallery" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-pink-600">Galeri</a>
+                        <a href="#testimonials" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-pink-600">Testimoni</a>
+                        <a href="#faq" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-pink-600">FAQ</a>
                     </div>
-                    <div class="hidden md:flex items-center space-x-2">
-                        <i class="fas fa-truck text-pink-500"></i>
-                        <span>Gratis Ongkir</span>
-                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-pink-600 focus:outline-none" id="mobile-menu-button">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-gradient py-12">
+        
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden bg-white shadow-lg" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                 <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <div class="countdown-box text-white font-bold text-center py-2 px-4 rounded-lg mb-6 inline-block">
-                        <div class="flex items-center justify-center space-x-2">
-                            <i class="fas fa-clock"></i>
-                            <span id="countdown">00:15:32</span>
-                        </div>
+            <h2 class="text-3xl font-bold text-center mb-12">Detail Produk</h2>
+                <a href="#gallery" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-600">Galeri</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-600">Testimoni</a>
+                <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-pink-600">FAQ</a>
+                <a href="#order" class="block px-3 py-2 rounded-md text-base font-medium bg-pink-600 text-white">Pesan Sekarang</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-gradient py-12 md:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="discount-badge bg-pink-600 text-white text-sm font-bold py-1 px-3 rounded-full inline-block mb-4">
+                        DISKON 75% HARI INI!
                     </div>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">LUXURY PREMIUM PLEATED DRESS</h1>
-                    <p class="text-xl mb-6 text-gray-600">Dress Mewah Kualitas Premium Import untuk Penampilan Elegan Anda</p>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight font-playfair">
+                        Luxury Premium Pleated Dress<br>
+                        <span class="text-pink-600">Dress Mewah Kualitas Premium Import</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Tampil elegan dan memukau dengan dress premium yang dirancang khusus untuk wanita modern. Cocok untuk berbagai acara formal maupun kasual.
+                    </p>
                     
-                    <div class="bg-white rounded-lg p-6 shadow-lg mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="text-3xl font-bold text-pink-600 price-tag">Rp225.000</div>
-                            <div class="ml-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">DISKON 75%</div>
+                    <div class="price-gradient rounded-lg p-4 inline-block mb-6">
+                        <p class="text-gray-600 line-through">Rp 900.000</p>
+                        <p class="text-3xl font-bold text-pink-700">Rp 225.000</p>
+                    </div>
+                    
+                    <div class="flex items-center mb-6">
+                        <div class="flex -space-x-2">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFBcRyd61l9Wa3NGosguYWEsuFb3AlrOtaFA&s" alt="">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRordhEPChNOARrEMOO6exEXx7uu_ruGJqk4PovxlZEoyX6vsGbeoZyj1OJvai1hkCntJ4&usqp=CAU" alt="">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://cdn0-production-images-kly.akamaized.net/mv5E1PfEPOMB6qGWsWMYHfuUbsA=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3017408/original/054111600_1578562443-Miss_Gaming.JPG" alt="">
                         </div>
-                        <p class="text-gray-500 mb-4"><s>Rp900.000</s></p>
-                        
-                        <div class="mb-6">
-                            <p class="font-semibold mb-2">Pilih Warna:</p>
-                            <div class="flex space-x-3">
-                                <div class="color-option denim active" data-color="denim"></div>
-                                <div class="color-option hitam" data-color="hitam"></div>
-                                <div class="color-option white" data-color="white"></div>
-                                <div class="color-option milo" data-color="milo"></div>
-                                <div class="color-option navy" data-color="navy"></div>
-                                <div class="color-option grey" data-color="grey"></div>
-                                <div class="color-option coksu" data-color="coksu"></div>
+                        <p class="ml-3 text-sm text-gray-600">
+                            <span class="font-bold">1.200+</span> wanita sudah membeli dress ini!
+                        </p>
+                    </div>
+                    
+                    <div class="countdown-box rounded-lg p-4 mb-6 inline-block">
+                        <p class="text-sm font-medium text-gray-700 mb-2">PROMO BERAKHIR DALAM:</p>
+                        <div class="flex space-x-2" id="countdown">
+                            <div class="text-center">
+                                <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-xl" id="hours">12</div>
+                                <span class="text-xs text-gray-600">Jam</span>
                             </div>
-                        </div>
-                        
-                        <a href="https://rara.orderonline.id/soft-genuine-leather-bags-2" class="cta-button text-white font-bold py-3 px-8 rounded-full inline-block text-center">BELI SEKARANG</a>
-                        
-                        <div class="mt-4 flex items-center text-sm text-gray-500">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Stok Terbatas - Hanya 12 pcs tersisa!</span>
+                            <div class="text-center">
+                                <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-xl" id="minutes">34</div>
+                                <span class="text-xs text-gray-600">Menit</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-xl" id="seconds">56</div>
+                                <span class="text-xs text-gray-600">Detik</span>
+                            </div>
                         </div>
                     </div>
+                    
+                    <a href="#order" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full inline-flex items-center transition duration-300 shadow-lg hover:shadow-xl">
+                        <span>BELI SEKARANG</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
-                
-                <div class="md:w-1/2">
-                    <div class="relative">
-                        <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-422618.jpg?v=1750297292&width=900" alt="Luxury Premium Pleated Dress" class="rounded-lg shadow-xl w-full max-w-md mx-auto">
-                        <div class="absolute -bottom-4 -right-4 bg-white p-2 rounded-full shadow-lg">
-                            <div class="bg-pink-500 text-white rounded-full w-12 h-12 flex items-center justify-center">
-                                <i class="fas fa-crown text-xl"></i>
-                            </div>
+                <div class="md:w-1/2 relative">
+                    <img src="https://i.pinimg.com/736x/25/0b/0a/250b0a0b73c6956b90052f623e220e6b.jpg" alt="Luxury Premium Pleated Dress" class="rounded-lg shadow-xl w-full h-auto max-h-[500px] object-cover">
+                    <div class="absolute -bottom-5 -right-5 bg-white p-3 rounded-full shadow-lg">
+                        <div class="bg-pink-100 rounded-full p-3">
+                            <i class="fas fa-award text-pink-600 text-2xl"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Features Section -->
+    
+    <!-- Trust Badges -->
+    <section class="py-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-4">
+                    <i class="fas fa-shield-alt text-3xl text-pink-600 mb-2"></i>
+                    <p class="text-sm font-medium">Kualitas Premium</p>
+                </div>
+                <div class="p-4">
+                    <i class="fas fa-truck text-3xl text-pink-600 mb-2"></i>
+                    <p class="text-sm font-medium">Gratis Ongkir</p>
+                </div>
+                <div class="p-4">
+                    <i class="fas fa-exchange-alt text-3xl text-pink-600 mb-2"></i>
+                    <p class="text-sm font-medium">Garansi 7 Hari</p>
+                </div>
+                <div class="p-4">
+                    <i class="fas fa-lock text-3xl text-pink-600 mb-2"></i>
+                    <p class="text-sm font-medium">Pembayaran Aman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <!-- Features Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12">Mengapa Memilih Dress Kami?</h2>
@@ -236,39 +250,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Gallery Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Galeri Produk</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-205668.jpg?v=1750297291&width=1030" alt="Dress Hitam" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://i.pinimg.com/736x/90/5a/9e/905a9e108517d5fc0d8df56a55681313.jpg" alt="Dress Broken White" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-422618.jpg?v=1750297292&width=900" alt="Dress Milo" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://i.pinimg.com/736x/25/0b/0a/250b0a0b73c6956b90052f623e220e6b.jpg" alt="Dress Navy" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-447824.jpg?v=1750297241&width=900" alt="Dress Grey" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-305252.jpg?v=1750297292&width=675" alt="Dress Coksu" class="w-full h-64 object-cover transition duration-500 hover:scale-105">
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <a href="https://rara.orderonline.id/soft-genuine-leather-bags-2" class="cta-button text-white font-bold py-3 px-8 rounded-full inline-block">LIHAT SEMUA WARNA</a>
-            </div>
-        </div>
-    </section>
-
     <!-- Detail Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -327,20 +308,71 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Apa Kata Pelanggan Kami?</h2>
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Galeri Produk</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Lihat bagaimana dress ini bisa membuat Anda tampil lebih elegan</p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="testimonial-card p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-422618.jpg?v=1750297292&width=900" alt="Luxury Dress Model 1" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-205668.jpg?v=1750297291&width=1030" alt="Luxury Dress Model 2" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-447824.jpg?v=1750297241&width=900" alt="Luxury Dress Model 3" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://i.pinimg.com/736x/25/0b/0a/250b0a0b73c6956b90052f623e220e6b.jpg" alt="Luxury Dress Detail 1" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                     </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://sc04.alicdn.com/kf/H2d58916fbd514648be509115fef85354F/278412092/H2d58916fbd514648be509115fef85354F.jpg" alt="Luxury Dress Detail 1" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                     </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-305252.jpg?v=1750297292&width=675" alt="Luxury Dress Detail 1" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://sc04.alicdn.com/kf/A65566653b22c46cf96bc420a59a20197T/278412092/A65566653b22c46cf96bc420a59a20197T.jpg" alt="Luxury Dress Detail 2" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+                    <img src="https://sc04.alicdn.com/kf/Hef58e9a62dbc435da28c8d73ef5844b85/278412092/Hef58e9a62dbc435da28c8d73ef5844b85.jpg" alt="Luxury Dress Detail 3" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Pilihan Warna Eksklusif</h3>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-gray-200 active" title="Broken White" style="background-color: #f5f5f0;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-gray-800" title="Hitam" style="background-color: #000;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-blue-900" title="Navy" style="background-color: #001f3f;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-gray-500" title="Grey" style="background-color: #808080;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-amber-800" title="Coksu" style="background-color: #8B4513;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-blue-600" title="Denim" style="background-color: #1560bd;"></div>
+                    <div class="color-option rounded-full w-12 h-12 cursor-pointer bg-amber-600" title="Milo" style="background-color: #b87333;"></div>
+                </div>
+                <p class="text-gray-600 mb-6">*Warna mungkin sedikit berbeda tergantung layar dan pencahayaan</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Apa Kata Mereka?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Testimoni nyata dari pelanggan kami yang sudah membeli dress ini</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <i class="fas fa-user text-xl"></i>
-                        </div>
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer 1" class="w-12 h-12 rounded-full object-cover">
                         <div class="ml-4">
-                            <h4 class="font-bold">Sarah, 28</h4>
+                            <h4 class="font-bold">Sarah Wijaya</h4>
                             <div class="flex text-yellow-400">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -350,16 +382,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"Dressnya sangat nyaman dipakai dan bahannya premium. Sudah dapat banyak pujian setiap pakai ini!"</p>
+                    <p class="text-gray-600">"Dressnya sangat nyaman dipakai dan bahannya premium. Sudah dipakai ke 3 acara berbeda dan selalu dapat pujian!"</p>
                 </div>
-                
-                <div class="testimonial-card p-6">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <i class="fas fa-user text-xl"></i>
-                        </div>
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer 2" class="w-12 h-12 rounded-full object-cover">
                         <div class="ml-4">
-                            <h4 class="font-bold">Dian, 35</h4>
+                            <h4 class="font-bold">Dian Permata</h4>
                             <div class="flex text-yellow-400">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -369,16 +398,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"Potongannya sangat flattering untuk tubuh saya. Warna navy-nya elegan banget untuk acara formal."</p>
+                    <p class="text-gray-600">"Pengiriman cepat dan packing rapi. Dressnya persis seperti di foto, bahannya adem dan jatuhnya bagus banget!"</p>
                 </div>
-                
-                <div class="testimonial-card p-6">
+                <div class="testimonial-card bg-gray-50 p-6 rounded-lg">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center text-pink-500">
-                            <i class="fas fa-user text-xl"></i>
-                        </div>
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Customer 3" class="w-12 h-12 rounded-full object-cover">
                         <div class="ml-4">
-                            <h4 class="font-bold">Rina, 42</h4>
+                            <h4 class="font-bold">Rina Hartono</h4>
                             <div class="flex text-yellow-400">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -388,155 +414,331 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-600">"Pengiriman cepat dan packing rapi. Dressnya persis seperti di foto, kualitasnya worth it banget untuk harganya."</p>
+                    <p class="text-gray-600">"Warnanya cantik dan cocok untuk berbagai acara. Sudah beli 2 warna berbeda karena suka banget dengan modelnya!"</p>
+                </div>
+            </div>
+            
+                                 
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- FAQ Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Pertanyaan yang Sering Diajukan</h2>
+    <section id="faq" class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-lg text-gray-600">Temukan jawaban atas pertanyaan Anda tentang produk kami</p>
+            </div>
             
-            <div class="max-w-3xl mx-auto">
-                <div class="faq-item p-4 mb-4">
-                    <div class="flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold">Apakah dress ini original import?</h3>
-                        <i class="fas fa-chevron-down text-pink-500"></i>
-                    </div>
-                    <div class="answer mt-2 text-gray-600 hidden">
-                        Ya, dress ini original import dengan kualitas premium. Kami bekerja langsung dengan supplier terpercaya di luar negeri.
-                    </div>
-                </div>
-                
-                <div class="faq-item p-4 mb-4">
-                    <div class="flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold">Bagaimana cara memilih ukuran yang tepat?</h3>
-                        <i class="fas fa-chevron-down text-pink-500"></i>
-                    </div>
-                    <div class="answer mt-2 text-gray-600 hidden">
-                        Kami menyediakan size chart lengkap yang bisa Anda lihat sebelum memesan. Jika ragu, CS kami siap membantu rekomendasi ukuran berdasarkan pengukuran tubuh Anda.
+            <div class="space-y-4">
+                <div class="faq-item bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-gray-900">
+                        <span>Apakah dress ini original atau replika?</span>
+                        <i class="fas fa-chevron-down text-pink-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Dress ini adalah produk original dari brand ternama dengan kualitas premium import. Kami tidak menjual barang replika atau KW.</p>
                     </div>
                 </div>
-                
-                <div class="faq-item p-4 mb-4">
-                    <div class="flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold">Berapa lama waktu pengiriman?</h3>
-                        <i class="fas fa-chevron-down text-pink-500"></i>
-                    </div>
-                    <div class="answer mt-2 text-gray-600 hidden">
-                        Untuk wilayah Jabodetabek biasanya 1-2 hari kerja. Luar Jawa 3-5 hari kerja, dan luar pulau Jawa 4-7 hari kerja. Kami menggunakan ekspedisi terpercaya seperti JNE, J&T, dan SiCepat.
+                <div class="faq-item bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-gray-900">
+                        <span>Berapa lama waktu pengiriman?</span>
+                        <i class="fas fa-chevron-down text-pink-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Biasanya pesanan diproses dalam 1-2 hari kerja dan dikirim via ekspedisi terpercaya. Estimasi pengiriman 2-5 hari kerja tergantung lokasi.</p>
                     </div>
                 </div>
-                
-                <div class="faq-item p-4 mb-4">
-                    <div class="flex justify-between items-center cursor-pointer">
-                        <h3 class="font-bold">Apakah ada garansi untuk produk ini?</h3>
-                        <i class="fas fa-chevron-down text-pink-500"></i>
+                <div class="faq-item bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-gray-900">
+                        <span>Apakah ada garansi untuk produk ini?</span>
+                        <i class="fas fa-chevron-down text-pink-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Ya, kami memberikan garansi 7 hari setelah barang diterima jika ada cacat produksi atau tidak sesuai pesanan.</p>
                     </div>
-                    <div class="answer mt-2 text-gray-600 hidden">
-                        Kami memberikan garansi 7 hari untuk produk cacat atau tidak sesuai pesanan. Pastikan untuk tidak mencabut label dan tidak mencuci produk sebelum memastikan cocok.
+                </div>
+                <div class="faq-item bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-gray-900">
+                        <span>Bagaimana cara menentukan ukuran yang tepat?</span>
+                        <i class="fas fa-chevron-down text-pink-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Kami menyediakan size chart lengkap yang bisa Anda lihat sebelum memesan. Jika ragu, tim customer service kami siap membantu rekomendasi ukuran.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-white p-6 rounded-lg shadow-sm">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-gray-900">
+                        <span>Apakah bisa COD (Cash On Delivery)?</span>
+                        <i class="fas fa-chevron-down text-pink-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="mt-3 text-gray-600 hidden">
+                        <p>Saat ini kami hanya melayani pembayaran via transfer bank, e-wallet, atau virtual account untuk memastikan transaksi yang aman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Order Section -->
+    <section id="order" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-8 md:p-10 shadow-lg">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Pesan Sekarang Juga!</h2>
+                    <p class="text-lg text-gray-600">Dapatkan dress premium dengan harga spesial hari ini</p>
+                </div>
+                
+                <div class="md:flex">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-6">
+                        <img src="https://mariam-col.com/cdn/shop/files/autumn-new-pleated-flared-sleeve-wedding-guest-dress-abaya-with-belt-ma193-422618.jpg?v=1750297292&width=900" alt="Luxury Dress" class="rounded-lg shadow-md w-full h-auto">
+                        
+                        <div class="mt-6 bg-white p-4 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-lg mb-2">Bonus Spesial Hari Ini:</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-pink-600 mt-1 mr-2"></i>
+                                    <span>Ikat pinggang matching gratis senilai Rp 75.000</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-pink-600 mt-1 mr-2"></i>
+                                    <span>E-book "Styling Dress untuk Berbagai Acara"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-pink-600 mt-1 mr-2"></i>
+                                    <span>Gratis ongkir ke seluruh Indonesia</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold">Luxury Premium Pleated Dress</h3>
+                                <div class="text-right">
+                                    <p class="text-gray-500 line-through">Rp 900.000</p>
+                                    <p class="text-2xl font-bold text-pink-600">Rp 225.000</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2">Pilih Warna:</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-gray-200 active" title="Broken White" style="background-color: #f5f5f0;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-gray-800" title="Hitam" style="background-color: #000;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-blue-900" title="Navy" style="background-color: #001f3f;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-gray-500" title="Grey" style="background-color: #808080;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-amber-800" title="Coksu" style="background-color: #8B4513;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-blue-600" title="Denim" style="background-color: #1560bd;"></button>
+                                    <button class="color-option rounded-full w-10 h-10 cursor-pointer bg-amber-600" title="Milo" style="background-color: #b87333;"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2">Pilih Ukuran:</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button class="size-option border border-gray-300 rounded py-2 px-3 text-center font-medium hover:border-pink-600 hover:text-pink-600">S</button>
+                                    <button class="size-option border border-gray-300 rounded py-2 px-3 text-center font-medium hover:border-pink-600 hover:text-pink-600">M</button>
+                                    <button class="size-option border border-gray-300 rounded py-2 px-3 text-center font-medium hover:border-pink-600 hover:text-pink-600">L</button>
+                                    <button class="size-option border border-gray-300 rounded py-2 px-3 text-center font-medium hover:border-pink-600 hover:text-pink-600">XL</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label class="block text-gray-700 font-medium mb-2">Jumlah:</label>
+                                <div class="flex items-center">
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="text" value="1" class="bg-gray-100 text-center w-16 py-2 border-t border-b border-gray-300">
+                                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-r">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="countdown-box rounded-lg p-3 mb-6 bg-pink-50">
+                                <p class="text-sm font-medium text-gray-700 mb-1">PROMO BERAKHIR DALAM:</p>
+                                <div class="flex space-x-2" id="countdown2">
+                                    <div class="text-center">
+                                        <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-sm" id="hours2">12</div>
+                                        <span class="text-xs text-gray-600">Jam</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-sm" id="minutes2">34</div>
+                                        <span class="text-xs text-gray-600">Menit</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="bg-pink-600 text-white font-bold rounded py-1 px-2 text-sm" id="seconds2">56</div>
+                                        <span class="text-xs text-gray-600">Detik</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a href="https://rara.orderonline.id/soft-genuine-leather-bags-2" class="block w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded text-center transition duration-300 mb-3">
+                                <i class="fas fa-shopping-cart mr-2"></i> Pesan Sekarang
+                            </a>
+                            
+                            <div class="text-center text-sm text-gray-600">
+                                <p><i class="fas fa-lock mr-1"></i> Pembayaran 100% Aman</p>
+                            </div>
+                        </div>
+                        
+                                                                              </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- CTA Section -->
-    <section class="py-16 bg-gradient-to-r from-pink-100 to-purple-100">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Jangan Lewatkan Kesempatan Ini!</h2>
-                <p class="text-xl mb-8">Dapatkan Luxury Premium Pleated Dress dengan harga spesial diskon 75% hanya untuk hari ini!</p>
-                
-                <div class="countdown-box text-white font-bold text-center py-3 px-6 rounded-lg mb-8 inline-block">
-                    <div class="flex items-center justify-center space-x-4">
-                        <i class="fas fa-clock text-xl"></i>
-                        <span id="countdown2" class="text-xl">00:15:32</span>
+    
+    <!-- Shipping Info -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Info Pengiriman</h2>
+                <p class="text-gray-600">Kami mengutamakan keamanan dan kenyamanan Anda</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 rounded-full p-3 mr-4">
+                            <i class="fas fa-truck text-blue-600"></i>
+                        </div>
+                        <h3 class="font-bold">Pengiriman Cepat</h3>
                     </div>
+                    <p class="text-gray-600">Pesanan diproses maksimal 1x24 jam dan dikirim via ekspedisi terpercaya seperti JNE, J&T, atau SiCepat.</p>
                 </div>
-                
-                <div class="bg-white rounded-lg p-6 shadow-lg inline-block mb-8">
-                    <div class="flex items-center justify-center">
-                        <div class="text-3xl font-bold text-pink-600 price-tag">Rp225.000</div>
-                        <div class="ml-4 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold">DISKON 75%</div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 rounded-full p-3 mr-4">
+                            <i class="fas fa-box-open text-green-600"></i>
+                        </div>
+                        <h3 class="font-bold">Packing Aman</h3>
                     </div>
-                    <p class="text-gray-500 mt-2"><s>Rp900.000</s></p>
+                    <p class="text-gray-600">Setiap produk dikemas dengan bubble wrap dan box khusus untuk memastikan barang sampai dalam kondisi sempurna.</p>
                 </div>
-                
-                <a href="https://rara.orderonline.id/soft-genuine-leather-bags-2" class="cta-button text-white font-bold py-4 px-12 rounded-full inline-block text-xl">PESAN SEKARANG</a>
-                
-                <div class="mt-6 flex items-center justify-center text-sm text-gray-600">
-                    <i class="fas fa-lock mr-2"></i>
-                    <span>Pembayaran Aman & Terjamin</span>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 rounded-full p-3 mr-4">
+                            <i class="fas fa-map-marker-alt text-purple-600"></i>
+                        </div>
+                        <h3 class="font-bold">Jangkauan Luas</h3>
+                    </div>
+                    <p class="text-gray-600">Kami kirim ke seluruh Indonesia, termasuk wilayah terpencil. Gratis ongkir untuk pembelian hari ini!</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Floating WhatsApp Button -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <a href="https://wa.me/6285177939365" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition">
-            <i class="fab fa-whatsapp text-2xl"></i>
-        </a>
+                   </a>
     </div>
-
+    
     <script>
-        // Countdown Timer
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Countdown timer
         function updateCountdown() {
-            let now = new Date();
-            let endOfDay = new Date();
-            endOfDay.setHours(23, 59, 59, 0);
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
             
-            let diff = endOfDay - now;
+            const diff = endOfDay - now;
             
-            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
             
-            document.getElementById("countdown").textContent = hours + ":" + minutes + ":" + seconds;
-            document.getElementById("countdown2").textContent = hours + ":" + minutes + ":" + seconds;
+            document.getElementById('hours2').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes2').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds2').textContent = seconds.toString().padStart(2, '0');
         }
         
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        // Color Selection
+        // Color selection
         const colorOptions = document.querySelectorAll('.color-option');
         colorOptions.forEach(option => {
-            option.addEventListener('click', () => {
+            option.addEventListener('click', function() {
                 colorOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
+                this.classList.add('active');
             });
         });
         
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('h3');
-            const answer = item.querySelector('.answer');
-            const icon = item.querySelector('.fa-chevron-down');
-            
-            question.addEventListener('click', () => {
-                answer.classList.toggle('hidden');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
+        // Size selection
+        const sizeOptions = document.querySelectorAll('.size-option');
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                sizeOptions.forEach(opt => opt.classList.remove('bg-pink-600', 'text-white', 'border-pink-600'));
+                this.classList.add('bg-pink-600', 'text-white', 'border-pink-600');
             });
         });
         
-        // Scroll to top button
-        window.addEventListener('scroll', () => {
-            const scrollToTopBtn = document.querySelector('.scroll-to-top');
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.remove('hidden');
-            } else {
-                scrollToTopBtn.classList.add('hidden');
+        // Quantity adjustment
+        const minusBtn = document.querySelector('.fa-minus').parentNode;
+        const plusBtn = document.querySelector('.fa-plus').parentNode;
+        const quantityInput = document.querySelector('input[type="text"]');
+        
+        minusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
             }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+            let value = parseInt(quantityInput.value);
+            quantityInput.value = value + 1;
+        });
+        
+        // FAQ accordion
+        const faqButtons = document.querySelectorAll('.faq-item button');
+        faqButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
         });
     </script>
 </body>
